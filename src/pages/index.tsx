@@ -2,6 +2,7 @@ import React from "react";
 import { RouteProp, ParamListBase } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useTranslation } from "react-i18next";
 
 import RecordsStack from "./records";
 import ToolsStack from "./tools";
@@ -33,6 +34,7 @@ function getTabIconByRoute(
 const Tab = createBottomTabNavigator();
 
 function HomeTab() {
+  const { t } = useTranslation();
   return (
     <Tab.Navigator
       screenOptions={(props) => ({
@@ -46,21 +48,21 @@ function HomeTab() {
         name="RecordsStack"
         component={RecordsStack}
         options={{
-          title: "Records",
+          title: t("tabName", { ns: "RecordsStack" }),
         }}
       />
       <Tab.Screen
         name="ToolsStack"
         component={ToolsStack}
         options={{
-          title: "Tools",
+          title: t("tabName", { ns: "ToolsStack" }),
         }}
       />
       <Tab.Screen
         name="SettingsStack"
         component={SettingsStack}
         options={{
-          title: "Settings",
+          title: t("tabName", { ns: "SettingsStack" }),
         }}
       />
     </Tab.Navigator>

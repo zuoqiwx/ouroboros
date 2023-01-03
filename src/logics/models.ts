@@ -30,7 +30,7 @@ export class Trigram {
   }
 }
 
-enum HexagramTypes {
+const enum HexagramTypes {
   Original = "original",
   Mutual = "mutual",
   Change = "change",
@@ -132,3 +132,20 @@ export class Hexagram {
     );
   }
 }
+
+// let lines = [
+//     new Line(true, false),  // --- o
+//     new Line(true, false),  // --- o
+//     new Line(true, true),   // ---
+//     new Line(false, false), // - - x
+//     new Line(false, true),  // - -
+//     new Line(true, false),  // - - o
+// ] as HexagramLines;
+// let hex = new Hexagram(lines);
+// console.log(hex.toString());
+// console.log(hex.mutual()?.toString());
+// console.log(hex.change()?.toString());
+// console.log(hex.complementary()?.toString());
+// console.log(hex.reverse()?.toString());
+// console.log(hex);
+// console.log(hex.reverse());
