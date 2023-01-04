@@ -1,0 +1,21 @@
+{
+  "tabName": "Tools",
+  "ToolsMenu": {
+    "title": "Toolbox"
+  },
+  "ToolManual": {
+    "title": "Manual Input",
+    "alertTitle": "Line Type",
+    "alertMessage": "Please choose the line type",
+    "alertYoungYin": "Young Yin",
+    "alertYoungYang": "Young Yang",
+    "alertOldYin": "Old Yin",
+    "alertOldYang": "Old Yang"
+  },
+  "ToolTime": {
+    "title": "Time Input"
+  },
+  "ToolNumber": {
+    "title": "Number Input"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "tabName": "占卜",
+  "ToolsMenu": {
+    "title": "占卜方式"
+  },
+  "ToolManual": {
+    "title": "手动占卜",
+    "alertTitle": "爻象",
+    "alertMessage": "请选取要输入的爻",
+    "alertYoungYin": "少阴",
+    "alertYoungYang": "少阳",
+    "alertOldYin": "老阴",
+    "alertOldYang": "老阳"
+  },
+  "ToolTime": {
+    "title": "梅花易数"
+  },
+  "ToolNumber": {
+    "title": "数字占卜"
+  }
+}

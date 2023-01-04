@@ -1,14 +1,14 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-import enCommon from "../../assets/locales/en/common.json";
-import enRecordsStack from "../../assets/locales/en/RecordsStack.json";
-import enToolsStack from "../../assets/locales/en/ToolsStack.json";
-import enSettingsStack from "../../assets/locales/en/SettingsStack.json";
-import zhCommon from "../../assets/locales/zh-CN/common.json";
-import zhRecordsStack from "../../assets/locales/zh-CN/RecordsStack.json";
-import zhToolsStack from "../../assets/locales/zh-CN/ToolsStack.json";
-import zhSettingsStack from "../../assets/locales/zh-CN/SettingsStack.json";
+import enCommon from "../../locales/en/common.json";
+import enRecordsStack from "../../locales/en/RecordsStack.json";
+import enToolsStack from "../../locales/en/ToolsStack.json";
+import enSettingsStack from "../../locales/en/SettingsStack.json";
+import zhCommon from "../../locales/zh-CN/common.json";
+import zhRecordsStack from "../../locales/zh-CN/RecordsStack.json";
+import zhToolsStack from "../../locales/zh-CN/ToolsStack.json";
+import zhSettingsStack from "../../locales/zh-CN/SettingsStack.json";
 
 export const defaultNS = "common";
 export const resources = {
@@ -29,9 +29,11 @@ export const resources = {
 i18n
   .use(initReactI18next)
   .init({
+    debug: process.env.APP_ENV === "development",
     resources,
     ns: ["common", "RecordsStack", "ToolsStack", "SettingsStack"],
     defaultNS,
+    fallbackNS: "common",
     lng: "zh-CN",
     fallbackLng: "en",
     interpolation: {
