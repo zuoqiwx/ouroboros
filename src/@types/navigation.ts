@@ -11,7 +11,7 @@ import type {
   CompositeScreenProps,
 } from "@react-navigation/native";
 
-type HomeTabParamList = {
+export type HomeTabParamList = {
   RecordsStack: undefined;
   ToolsStack: undefined;
   SettingsStack: undefined;
@@ -21,7 +21,7 @@ export type HomeTabNavigationProp<T extends keyof HomeTabParamList> =
 export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   BottomTabScreenProps<HomeTabParamList, T>;
 
-type RecordsStackParamList = {
+export type RecordsStackParamList = {
   Records: undefined;
   RecordDetails: undefined;
 };
@@ -34,4 +34,19 @@ export type RecordsStackScreenProps<T extends keyof RecordsStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<RecordsStackParamList, T>,
     HomeTabScreenProps<"RecordsStack">
+  >;
+
+export type ToolsStackParamList = {
+  ToolsMenu: undefined;
+  ToolManual: undefined;
+};
+export type ToolsStackNavigationProp<T extends keyof ToolsStackParamList> =
+  CompositeNavigationProp<
+    NativeStackNavigationProp<ToolsStackParamList, T>,
+    HomeTabNavigationProp<"ToolsStack">
+  >;
+export type ToolsStackScreenProps<T extends keyof ToolsStackParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<ToolsStackParamList, T>,
+    HomeTabScreenProps<"ToolsStack">
   >;

@@ -1,10 +1,12 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-import ToolsPage from "./Tools";
 import { useTranslation } from "react-i18next";
 
-const Stack = createNativeStackNavigator();
+import type { ToolsStackParamList } from "../../@types/navigation";
+import ToolsPage from "./Tools";
+import ToolManualPage from "./ToolManual";
+
+const Stack = createNativeStackNavigator<ToolsStackParamList>();
 
 function ToolsStack() {
   const { t } = useTranslation();
@@ -15,6 +17,14 @@ function ToolsStack() {
         component={ToolsPage}
         options={{
           title: t("ToolsMenu.title", { ns: "ToolsStack" }),
+        }}
+      />
+      <Stack.Screen
+        name="ToolManual"
+        component={ToolManualPage}
+        options={{
+          title: t("ToolManual.title", { ns: "ToolsStack" }),
+          presentation: "modal",
         }}
       />
     </Stack.Navigator>

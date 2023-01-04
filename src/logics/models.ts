@@ -14,7 +14,7 @@ export class Line {
   }
 }
 
-type TrigramLines = [Line, Line, Line];
+export type TrigramLines = [Line, Line, Line];
 
 export class Trigram {
   lines: TrigramLines;
@@ -38,7 +38,8 @@ const enum HexagramTypes {
   Reverse = "reverse",
 }
 
-type HexagramLines = [Line, Line, Line, Line, Line, Line];
+export type HexagramLines = [Line, Line, Line, Line, Line, Line];
+export type HexagramLinesOptional = [Line?, Line?, Line?, Line?, Line?, Line?];
 
 export class Hexagram {
   lines: HexagramLines;
