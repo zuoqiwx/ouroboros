@@ -5,17 +5,22 @@
   },
   "ToolManual": {
     "title": "手动占卜",
-    "alertTitle": "爻象",
-    "alertMessage": "请选取要输入的爻",
-    "alertYoungYin": "少阴",
-    "alertYoungYang": "少阳",
-    "alertOldYin": "老阴",
-    "alertOldYang": "老阳"
+    "alert": {
+      "title": "爻象",
+      "message": "请选取要输入的爻",
+      "youngYin": "少阴",
+      "youngYang": "少阳",
+      "oldYin": "老阴",
+      "oldYang": "老阳"
+    }
   },
   "ToolTime": {
     "title": "梅花易数"
   },
   "ToolNumber": {
     "title": "数字占卜"
+  },
+  "ToolResult": {
+    "title": "占卜结果"
   }
 }

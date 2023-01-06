@@ -7,14 +7,14 @@ import { useTranslation } from "react-i18next";
 const Stack = createNativeStackNavigator();
 
 function SettingsStack() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("SettingsStack");
   return (
     <Stack.Navigator initialRouteName="SettingsMenu">
       <Stack.Screen
         name="SettingsMenu"
         component={SettingsPage}
         options={{
-          title: t("SettingsMenu.title", { ns: "SettingsStack" }),
+          title: t("SettingsMenu.title"),
         }}
       />
     </Stack.Navigator>

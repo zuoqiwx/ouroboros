@@ -13,6 +13,7 @@ export class Line {
     }`;
   }
 }
+export type LineOptional = Line | undefined;
 
 export type TrigramLines = [Line, Line, Line];
 
@@ -39,7 +40,14 @@ const enum HexagramTypes {
 }
 
 export type HexagramLines = [Line, Line, Line, Line, Line, Line];
-export type HexagramLinesOptional = [Line?, Line?, Line?, Line?, Line?, Line?];
+export type HexagramLinesOptional = [
+  LineOptional,
+  LineOptional,
+  LineOptional,
+  LineOptional,
+  LineOptional,
+  LineOptional
+];
 
 export class Hexagram {
   lines: HexagramLines;

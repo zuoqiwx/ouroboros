@@ -8,10 +8,12 @@ function EmptyLineDisplay({
   height = 40,
   margin = 10,
   sequence,
+  showError = false,
 }: {
   height?: number;
   margin?: number;
   sequence?: number;
+  showError?: boolean;
 }) {
   const { t } = useTranslation();
 
@@ -29,7 +31,7 @@ function EmptyLineDisplay({
       ) : (
         <View style={styles.placeholder} />
       )}
-      <View style={styles.empty} />
+      <View style={showError ? [styles.empty, styles.error] : styles.empty} />
       <View style={styles.placeholder} />
     </View>
   );
@@ -57,6 +59,9 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderStyle: "dashed",
     borderColor: "black",
+  },
+  error: {
+    borderColor: "red",
   },
 });
 

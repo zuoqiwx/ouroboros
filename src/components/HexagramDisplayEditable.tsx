@@ -10,17 +10,18 @@ import { useTranslation } from "react-i18next";
 
 function changeTargetLine(
   targetIndex: number,
-  setLines: Dispatch<SetStateAction<any[]>>,
+  setLines: Dispatch<SetStateAction<HexagramLinesOptional>>,
   young: boolean,
   yang: boolean
 ) {
-  setLines((curr) =>
-    curr.map((line: Line | undefined, index: number): Line | undefined => {
-      if (index === targetIndex) {
-        return new Line(yang, young);
-      }
-      return line;
-    })
+  setLines(
+    (curr) =>
+      curr.map((line, index) => {
+        if (index === targetIndex) {
+          return new Line(yang, young);
+        }
+        return line;
+      }) as HexagramLinesOptional
   );
 }
 
@@ -36,32 +37,39 @@ type AlertInfo = {
 
 function createManualLineAlert(
   index: number,
-  setLines: Dispatch<SetStateAction<any[]>>,
+  setLines: Dispatch<SetStateAction<HexagramLinesOptional>>,
   alertInfo: AlertInfo
 ) {
   return () =>
-    Alert.alert(alertInfo.title, alertInfo.message, [
+    Alert.alert(
+      alertInfo.title,
+      alertInfo.message,
+      [
+        {
+          text: alertInfo.youngYin,
+          onPress: () => changeTargetLine(index, setLines, true, false),
+        },
+        {
+          text: alertInfo.youngYang,
+          onPress: () => changeTargetLine(index, setLines, true, true),
+        },
+        {
+          text: alertInfo.oldYin,
+          onPress: () => changeTargetLine(index, setLines, false, false),
+        },
+        {
+          text: alertInfo.oldYang,
+          onPress: () => changeTargetLine(index, setLines, false, true),
+        },
+        {
+          text: alertInfo.cancel,
+          style: "cancel",
+        },
+      ],
       {
-        text: alertInfo.youngYin,
-        onPress: () => changeTargetLine(index, setLines, true, false),
-      },
-      {
-        text: alertInfo.youngYang,
-        onPress: () => changeTargetLine(index, setLines, true, true),
-      },
-      {
-        text: alertInfo.oldYin,
-        onPress: () => changeTargetLine(index, setLines, false, false),
-      },
-      {
-        text: alertInfo.oldYang,
-        onPress: () => changeTargetLine(index, setLines, false, true),
-      },
-      {
-        text: alertInfo.cancel,
-        style: "cancel",
-      },
-    ]);
+        cancelable: true,
+      }
+    );
 }
 
 function HexagramDisplayEditable({
@@ -71,22 +79,24 @@ function HexagramDisplayEditable({
   lineMargin = 10,
   showSequence = false,
   showChange = false,
+  showError = false,
 }: {
   lines: HexagramLinesOptional;
-  setLines: Dispatch<SetStateAction<any[]>>;
+  setLines: Dispatch<SetStateAction<HexagramLinesOptional>>;
   lineHeight?: number;
   lineMargin?: number;
   showSequence?: boolean;
   showChange?: boolean;
+  showError?: boolean;
 }) {
   const { t } = useTranslation("ToolsStack");
   const alertInfo = {
-    title: t("ToolManual.alertTitle"),
-    message: t("ToolManual.alertMessage"),
-    youngYin: t("ToolManual.alertYoungYin"),
-    youngYang: t("ToolManual.alertYoungYang"),
-    oldYin: t("ToolManual.alertOldYin"),
-    oldYang: t("ToolManual.alertOldYang"),
+    title: t("ToolManual.alert.title"),
+    message: t("ToolManual.alert.message"),
+    youngYin: t("ToolManual.alert.youngYin"),
+    youngYang: t("ToolManual.alert.youngYang"),
+    oldYin: t("ToolManual.alert.oldYin"),
+    oldYang: t("ToolManual.alert.oldYang"),
     cancel: t("cancel"),
   };
 
@@ -111,6 +121,7 @@ function HexagramDisplayEditable({
                 height={lineHeight}
                 margin={lineMargin}
                 sequence={showSequence ? index + 1 : undefined}
+                showError={showError}
               />
             )}
           </Pressable>

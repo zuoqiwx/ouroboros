@@ -5,17 +5,22 @@
   },
   "ToolManual": {
     "title": "Manual Input",
-    "alertTitle": "Line Type",
-    "alertMessage": "Please choose the line type",
-    "alertYoungYin": "Young Yin",
-    "alertYoungYang": "Young Yang",
-    "alertOldYin": "Old Yin",
-    "alertOldYang": "Old Yang"
+    "alert": {
+      "title": "Line Type",
+      "message": "Please choose the line type",
+      "youngYin": "Young Yin",
+      "youngYang": "Young Yang",
+      "oldYin": "Old Yin",
+      "oldYang": "Old Yang"
+    }
   },
   "ToolTime": {
     "title": "Time Input"
   },
   "ToolNumber": {
     "title": "Number Input"
+  },
+  "ToolResult": {
+    "title": "Result"
   }
 }

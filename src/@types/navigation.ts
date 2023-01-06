@@ -11,6 +11,8 @@ import type {
   CompositeScreenProps,
 } from "@react-navigation/native";
 
+import type { Hexagram } from "../logics/models";
+
 export type HomeTabParamList = {
   RecordsStack: undefined;
   ToolsStack: undefined;
@@ -23,7 +25,10 @@ export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
 
 export type RecordsStackParamList = {
   Records: undefined;
-  RecordDetails: undefined;
+  RecordDetails: {
+    hexagram: Hexagram;
+    showSave: boolean;
+  };
 };
 export type RecordsStackNavigationProp<T extends keyof RecordsStackParamList> =
   CompositeNavigationProp<
@@ -39,6 +44,10 @@ export type RecordsStackScreenProps<T extends keyof RecordsStackParamList> =
 export type ToolsStackParamList = {
   ToolsMenu: undefined;
   ToolManual: undefined;
+  ToolResult: {
+    hexagram: Hexagram;
+    showSave: boolean;
+  };
 };
 export type ToolsStackNavigationProp<T extends keyof ToolsStackParamList> =
   CompositeNavigationProp<

@@ -3,12 +3,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTranslation } from "react-i18next";
 
 import RecordsPage from "./Records";
-import RecordDetailsPage from "./RecordDetail";
+import RecordDetailsPage from "../common/RecordDetail";
 
 const Stack = createNativeStackNavigator();
 
 function RecordsStack() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("RecordsStack");
 
   return (
     <Stack.Navigator initialRouteName="Records">
@@ -16,14 +16,14 @@ function RecordsStack() {
         name="Records"
         component={RecordsPage}
         options={{
-          title: t("Records.title", { ns: "RecordsStack" }),
+          title: t("Records.title"),
         }}
       />
       <Stack.Screen
         name="RecordDetails"
         component={RecordDetailsPage}
         options={{
-          title: t("RecordDetails.title", { ns: "RecordsStack" }),
+          title: t("RecordDetails.title"),
         }}
       />
     </Stack.Navigator>
