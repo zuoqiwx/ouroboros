@@ -1,16 +1,25 @@
 export class Line {
   young: boolean;
   yang: boolean;
+  changed: boolean;
 
-  constructor(yang: boolean, young = false) {
+  constructor(yang: boolean, young = false, changed = false) {
     this.young = young;
     this.yang = yang;
+    this.changed = changed;
   }
 
   toString(): string {
+    const noChange = this.young && !this.changed;
+    const isCross =
+      (this.young && this.yang && this.changed) || (!this.young && !this.yang);
     return `${this.yang ? "---" : "- -"} ${
-      this.young ? " " : this.yang ? "o" : "x"
+      noChange ? " " : isCross ? "x" : "o"
     }`;
+  }
+
+  static fromObject(value: Line): Line {
+    return new Line(value.yang, value.young);
   }
 }
 export type LineOptional = Line | undefined;
@@ -48,6 +57,14 @@ export type HexagramLinesOptional = [
   LineOptional,
   LineOptional
 ];
+
+type HexagramTransforms = {
+  original: Hexagram;
+  mutual: Hexagram | undefined;
+  change: Hexagram | undefined;
+  complementary: Hexagram | undefined;
+  reverse: Hexagram | undefined;
+};
 
 export class Hexagram {
   lines: HexagramLines;
@@ -94,7 +111,7 @@ export class Hexagram {
         if (line.young) {
           return line;
         }
-        return new Line(!line.yang, !line.young);
+        return new Line(!line.yang, !line.young, true);
       }) as HexagramLines,
       HexagramTypes.Change
     );
@@ -128,6 +145,16 @@ export class Hexagram {
     );
   }
 
+  static getTransforms(hexagram: Hexagram): HexagramTransforms {
+    return {
+      original: hexagram,
+      mutual: hexagram.mutual(),
+      change: hexagram.change(),
+      complementary: hexagram.complementary(),
+      reverse: hexagram.reverse(),
+    };
+  }
+
   toString(): string {
     return (
       this.type +
@@ -140,21 +167,11 @@ export class Hexagram {
         }, "")
     );
   }
-}
 
-// let lines = [
-//     new Line(true, false),  // --- o
-//     new Line(true, false),  // --- o
-//     new Line(true, true),   // ---
-//     new Line(false, false), // - - x
-//     new Line(false, true),  // - -
-//     new Line(true, false),  // - - o
-// ] as HexagramLines;
-// let hex = new Hexagram(lines);
-// console.log(hex.toString());
-// console.log(hex.mutual()?.toString());
-// console.log(hex.change()?.toString());
-// console.log(hex.complementary()?.toString());
-// console.log(hex.reverse()?.toString());
-// console.log(hex);
-// console.log(hex.reverse());
+  static fromObject(value: Hexagram): Hexagram {
+    return new Hexagram(
+      value.lines.map((line) => Line.fromObject(line)) as HexagramLines,
+      value.type
+    );
+  }
+}

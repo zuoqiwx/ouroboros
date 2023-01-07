@@ -5,25 +5,32 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Line } from "../logics/models";
 import { useTranslation } from "react-i18next";
 
-export function getSequenceRender(sequence: string, height: number) {
+export function getSequenceRender(
+  sequence: string | undefined,
+  height: number
+) {
   return (
     <View style={styles.sequenceContainer}>
-      <Text style={{ fontSize: height * 0.5, ...styles.sequence }}>
-        {sequence}
-      </Text>
+      {sequence && (
+        <Text style={{ fontSize: height * 0.5, ...styles.sequence }}>
+          {sequence}
+        </Text>
+      )}
     </View>
   );
 }
 
-function getChangeIconFromLine(line: Line, height: number) {
-  if (line.young) {
+function getChangeIconFromLine(line: Line | undefined, height: number) {
+  if (!line || (line.young && !line.changed)) {
     return <View style={styles.changeContainer} />;
   }
+  const isCross =
+    (line.young && line.yang && line.changed) || (!line.young && !line.yang);
   return (
     <View style={styles.changeContainer}>
       <MaterialCommunityIcons
-        name={line.yang ? "circle-outline" : "close-thick"}
-        size={line.yang ? height * 0.8 : height}
+        name={isCross ? "close-thick" : "circle-outline"}
+        size={isCross ? height : height * 0.8}
         color={styles.changeIcon.color}
       />
     </View>
@@ -54,7 +61,7 @@ function LineDisplay({
         ...styles.container,
       }}
     >
-      {sequence && getSequenceRender(t(sequence.toString()), height)}
+      {getSequenceRender(sequence ? t(sequence.toString()) : undefined, height)}
       {line.yang ? (
         <View style={styles.wholeSegment} />
       ) : (
@@ -64,7 +71,7 @@ function LineDisplay({
           <View style={styles.filled} />
         </View>
       )}
-      {showChange && getChangeIconFromLine(line, height)}
+      {getChangeIconFromLine(showChange ? line : undefined, height)}
     </View>
   );
 }
