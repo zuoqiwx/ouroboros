@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { View, Button, Alert, StyleSheet } from "react-native";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,7 @@ import {
   ToolsStackParamList,
 } from "../../@types/navigation";
 import { Hexagram } from "../../logics/models";
+import { setRecord } from "../../logics/storage";
 
 type PromptInfo = {
   title: string;
@@ -17,10 +18,13 @@ type PromptInfo = {
   cancel: string;
 };
 
-function createHexagramSavePrompt(hexagram: Hexagram, promptInfo: PromptInfo) {
+function createHexagramSavePrompt(
+  hexagram: Hexagram,
+  promptInfo: PromptInfo,
+  setSaved: Dispatch<SetStateAction<boolean>>
+) {
   return () => {
     const now = new Date();
-    const key = `record-${now.getTime().toString()}`;
     Alert.prompt(
       promptInfo.title,
       promptInfo.message,
@@ -28,9 +32,20 @@ function createHexagramSavePrompt(hexagram: Hexagram, promptInfo: PromptInfo) {
         {
           text: promptInfo.save,
           onPress: (name) => {
-            console.log(key);
-            console.log(name);
-            console.log(hexagram);
+            const record = {
+              name: name as string,
+              time: now,
+              hexagram: hexagram,
+            };
+            setRecord(record)
+              .then((success) => {
+                if (success) {
+                  setSaved(true);
+                } else {
+                  console.error("Failed to save record");
+                }
+              })
+              .catch((error) => console.error(error));
           },
         },
         {
@@ -56,27 +71,33 @@ function DetailPage({
   const { original, mutual, change, complementary, reverse } =
     Hexagram.getTransforms(hexagram);
   const { t } = useTranslation();
-  const promptInfo = {
-    title: t("Details.prompt.title"),
-    message: t("Details.prompt.message"),
-    save: t("save"),
-    cancel: t("cancel"),
-  };
+  const [saved, setSaved] = useState(false);
   const lineHeight = 20;
   const lineMargin = 2;
 
   useEffect(() => {
+    if (saved) {
+      navigation.navigate("ToolsMenu");
+    }
+  }, [navigation, saved]);
+
+  useEffect(() => {
+    const promptInfo = {
+      title: t("Details.prompt.title"),
+      message: t("Details.prompt.message"),
+      save: t("save"),
+      cancel: t("cancel"),
+    };
     showSave &&
       navigation.setOptions({
         headerRight: () => (
           <Button
             title={t("save")}
-            onPress={createHexagramSavePrompt(hexagram, promptInfo)}
+            onPress={createHexagramSavePrompt(hexagram, promptInfo, setSaved)}
           />
         ),
       });
-  }, [navigation, showSave, hexagram]);
-  console.log(change);
+  }, [navigation, showSave, t, hexagram]);
 
   return (
     <>

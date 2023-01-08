@@ -39,7 +39,7 @@ function ToolManualPage({ navigation }: ToolsStackScreenProps<"ToolManual">) {
         />
       ),
     });
-  }, [navigation, lines]);
+  }, [navigation, t, lines]);
 
   return (
     <View>

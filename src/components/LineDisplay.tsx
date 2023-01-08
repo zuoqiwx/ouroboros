@@ -61,7 +61,10 @@ function LineDisplay({
         ...styles.container,
       }}
     >
-      {getSequenceRender(sequence ? t(sequence.toString()) : undefined, height)}
+      {getSequenceRender(
+        sequence ? (t(sequence.toString()) as string | undefined) : undefined,
+        height
+      )}
       {line.yang ? (
         <View style={styles.wholeSegment} />
       ) : (
