@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import type { ToolsStackParamList } from "../../@types/navigation";
 import ToolsPage from "./Tools";
 import ToolManualPage from "./ToolManual";
+import ToolTimePage from "./ToolTime";
 import RecordDetailsPage from "../common/RecordDetail";
 
 const Stack = createNativeStackNavigator<ToolsStackParamList>();
@@ -25,6 +26,13 @@ function ToolsStack() {
         component={ToolManualPage}
         options={{
           title: t("ToolManual.title"),
+        }}
+      />
+      <Stack.Screen
+        name="ToolTime"
+        component={ToolTimePage}
+        options={{
+          title: t("ToolTime.title"),
         }}
       />
       <Stack.Screen

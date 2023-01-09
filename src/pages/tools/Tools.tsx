@@ -6,10 +6,12 @@ import type {
   ToolsStackParamList,
   ToolsStackScreenProps,
 } from "../../@types/navigation";
+import { useNavigation } from "@react-navigation/native";
 
 const toolList = ["ToolManual", "ToolTime", "ToolNumber"];
 
-function ToolsPage({ navigation }: ToolsStackScreenProps<"ToolsMenu">) {
+function ToolsPage() {
+  const navigation = useNavigation();
   const { t } = useTranslation("ToolsStack");
   return (
     <View>

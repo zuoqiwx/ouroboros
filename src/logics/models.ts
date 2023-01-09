@@ -3,10 +3,14 @@ export class Line {
   yang: boolean;
   changed: boolean;
 
-  constructor(yang: boolean, young = false, changed = false) {
+  constructor(yang: boolean, young = true, changed = false) {
     this.young = young;
     this.yang = yang;
     this.changed = changed;
+  }
+
+  setChanged(value: boolean) {
+    this.changed = value;
   }
 
   toString(): string {
@@ -166,6 +170,14 @@ export class Hexagram {
           return prev + curr.toString() + "\n";
         }, "")
     );
+  }
+
+  static fromTrigrams(lower: Trigram, upper: Trigram, changeIndex: number) {
+    const result = new Hexagram(
+      lower.lines.concat(upper.lines) as HexagramLines
+    );
+    result.lines[changeIndex].setChanged(true);
+    return result;
   }
 
   static fromObject(value: Hexagram): Hexagram {
