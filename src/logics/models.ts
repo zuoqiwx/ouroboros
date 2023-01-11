@@ -9,8 +9,13 @@ export class Line {
     this.changed = changed;
   }
 
-  setChanged(value: boolean) {
-    this.changed = value;
+  setChanged() {
+    this.young = false;
+    this.changed = true;
+  }
+
+  getIndex(): number {
+    return this.yang ? 0 : 1;
   }
 
   toString(): string {
@@ -32,9 +37,19 @@ export type TrigramLines = [Line, Line, Line];
 
 export class Trigram {
   lines: TrigramLines;
+  index: number;
 
   constructor(lines: TrigramLines) {
     this.lines = lines;
+    this.index = this.getIndex();
+  }
+
+  getIndex(): number {
+    return (
+      this.lines[0].getIndex() * 4 +
+      this.lines[1].getIndex() * 2 +
+      this.lines[2].getIndex()
+    );
   }
 
   toString(): string {
@@ -83,11 +98,15 @@ export class Hexagram {
   }
 
   upper(): Trigram {
-    return new Trigram(this.lines.slice(0, 3) as TrigramLines);
+    return new Trigram(this.lines.slice(3, 6) as TrigramLines);
   }
 
   lower(): Trigram {
-    return new Trigram(this.lines.slice(3, 6) as TrigramLines);
+    return new Trigram(this.lines.slice(0, 3) as TrigramLines);
+  }
+
+  getIndex(): number {
+    return this.lower().getIndex() * 8 + this.upper().getIndex();
   }
 
   mutual(): Hexagram | undefined {
@@ -113,7 +132,7 @@ export class Hexagram {
     return new Hexagram(
       this.lines.map((line) => {
         if (line.young) {
-          return line;
+          return new Line(line.yang, line.young);
         }
         return new Line(!line.yang, !line.young, true);
       }) as HexagramLines,
@@ -176,7 +195,7 @@ export class Hexagram {
     const result = new Hexagram(
       lower.lines.concat(upper.lines) as HexagramLines
     );
-    result.lines[changeIndex - 1].setChanged(true);
+    result.lines[changeIndex - 1].setChanged();
     return result;
   }
 

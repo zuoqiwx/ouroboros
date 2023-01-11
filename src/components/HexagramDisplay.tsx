@@ -37,7 +37,7 @@ function HexagramDisplay({
 
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
+    margin: 3,
   },
 });
 

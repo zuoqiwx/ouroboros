@@ -16,5 +16,10 @@
       "title": "保存到本地",
       "message": "请输入结果的名字"
     }
-  }
+  },
+  "original": "本卦",
+  "mutual": "互卦",
+  "change": "变卦",
+  "complementary": "错卦",
+  "reverse": "综卦"
 }

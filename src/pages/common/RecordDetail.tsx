@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
-import { View, Button, Alert, StyleSheet } from "react-native";
+import { Text, View, Button, Alert, StyleSheet, Pressable } from "react-native";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
@@ -10,6 +10,7 @@ import {
 } from "../../@types/navigation";
 import { Hexagram } from "../../logics/models";
 import { setRecord } from "../../logics/storage";
+import analysisInfo from "../../network/analysis_urls.json";
 
 type PromptInfo = {
   title: string;
@@ -75,6 +76,17 @@ function DetailPage({
   const lineHeight = 20;
   const lineMargin = 2;
 
+  function goToAnalysis(hexagram: Hexagram, showChange = false) {
+    const param = {
+      hexagram,
+      showChange,
+    };
+    return () =>
+      showSave
+        ? navigation.navigate("ToolAnalysis", param)
+        : navigation.navigate("RecordAnalysis", param);
+  }
+
   useEffect(() => {
     if (saved) {
       navigation.navigate("ToolsMenu");
@@ -104,59 +116,89 @@ function DetailPage({
       <View style={styles.container}>
         <View style={styles.smallSpace} />
         <View style={styles.smallContent}>
-          <HexagramDisplay
-            hexagram={original}
-            lineHeight={lineHeight}
-            lineMargin={lineMargin}
-            showSequence={false}
-            showChange={true}
-          />
+          <Pressable onPress={goToAnalysis(original, true)}>
+            <HexagramDisplay
+              hexagram={original}
+              lineHeight={lineHeight}
+              lineMargin={lineMargin}
+              showSequence={false}
+              showChange={true}
+            />
+            <Text style={styles.text}>{t(original.type)}</Text>
+            <Text style={styles.text}>
+              {analysisInfo[original.getIndex()].name}
+            </Text>
+          </Pressable>
         </View>
         <View style={styles.smallSpace} />
         <View style={styles.smallContent}>
-          <HexagramDisplay
-            hexagram={mutual as Hexagram}
-            lineHeight={lineHeight}
-            lineMargin={lineMargin}
-            showSequence={false}
-            showChange={false}
-          />
+          <Pressable onPress={goToAnalysis(mutual as Hexagram)}>
+            <HexagramDisplay
+              hexagram={mutual as Hexagram}
+              lineHeight={lineHeight}
+              lineMargin={lineMargin}
+              showSequence={false}
+              showChange={false}
+            />
+          </Pressable>
+          <Text style={styles.text}>{t((mutual as Hexagram).type)}</Text>
+          <Text style={styles.text}>
+            {analysisInfo[(mutual as Hexagram).getIndex()].name}
+          </Text>
         </View>
         <View style={styles.smallSpace} />
       </View>
       <View style={styles.container}>
         <View style={styles.largeSpace} />
         <View style={styles.largeContent}>
-          <HexagramDisplay
-            hexagram={change as Hexagram}
-            lineHeight={lineHeight}
-            lineMargin={lineMargin}
-            showSequence={false}
-            showChange={true}
-          />
+          <Pressable onPress={goToAnalysis(change as Hexagram)}>
+            <HexagramDisplay
+              hexagram={change as Hexagram}
+              lineHeight={lineHeight}
+              lineMargin={lineMargin}
+              showSequence={false}
+              showChange={true}
+            />
+          </Pressable>
+          <Text style={styles.text}>{t((change as Hexagram).type)}</Text>
+          <Text style={styles.text}>
+            {analysisInfo[(change as Hexagram).getIndex()].name}
+          </Text>
         </View>
         <View style={styles.largeSpace} />
       </View>
       <View style={styles.container}>
         <View style={styles.smallSpace} />
         <View style={styles.smallContent}>
-          <HexagramDisplay
-            hexagram={complementary as Hexagram}
-            lineHeight={lineHeight}
-            lineMargin={lineMargin}
-            showSequence={false}
-            showChange={false}
-          />
+          <Pressable onPress={goToAnalysis(complementary as Hexagram)}>
+            <HexagramDisplay
+              hexagram={complementary as Hexagram}
+              lineHeight={lineHeight}
+              lineMargin={lineMargin}
+              showSequence={false}
+              showChange={false}
+            />
+          </Pressable>
+          <Text style={styles.text}>{t((complementary as Hexagram).type)}</Text>
+          <Text style={styles.text}>
+            {analysisInfo[(complementary as Hexagram).getIndex()].name}
+          </Text>
         </View>
         <View style={styles.smallSpace} />
         <View style={styles.smallContent}>
-          <HexagramDisplay
-            hexagram={reverse as Hexagram}
-            lineHeight={lineHeight}
-            lineMargin={lineMargin}
-            showSequence={false}
-            showChange={false}
-          />
+          <Pressable onPress={goToAnalysis(reverse as Hexagram)}>
+            <HexagramDisplay
+              hexagram={reverse as Hexagram}
+              lineHeight={lineHeight}
+              lineMargin={lineMargin}
+              showSequence={false}
+              showChange={false}
+            />
+          </Pressable>
+          <Text style={styles.text}>{t((reverse as Hexagram).type)}</Text>
+          <Text style={styles.text}>
+            {analysisInfo[(reverse as Hexagram).getIndex()].name}
+          </Text>
         </View>
         <View style={styles.smallSpace} />
       </View>
@@ -183,5 +225,9 @@ const styles = StyleSheet.create({
   },
   largeSpace: {
     flex: 7,
+  },
+  text: {
+    fontSize: 18,
+    alignSelf: "center",
   },
 });

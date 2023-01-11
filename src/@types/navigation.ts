@@ -29,6 +29,10 @@ export type RecordsStackParamList = {
     hexagram: Hexagram;
     showSave: boolean;
   };
+  RecordAnalysis: {
+    hexagram: Hexagram;
+    showChange: boolean;
+  };
 };
 export type RecordsStackNavigationProp<T extends keyof RecordsStackParamList> =
   CompositeNavigationProp<
@@ -47,6 +51,10 @@ export type ToolsStackParamList = {
   ToolResult: {
     hexagram: Hexagram;
     showSave: boolean;
+  };
+  ToolAnalysis: {
+    hexagram: Hexagram;
+    showChange: boolean;
   };
 };
 export type ToolsStackNavigationProp<T extends keyof ToolsStackParamList> =

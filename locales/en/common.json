@@ -16,5 +16,10 @@
       "title": "Save to Local",
       "message": "Choose a name you like with this result"
     }
-  }
+  },
+  "original": "Original",
+  "mutual": "Mutual",
+  "change": "Change",
+  "complementary": "Complmentary",
+  "reverse": "Reverse"
 }

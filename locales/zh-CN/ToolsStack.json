@@ -22,5 +22,8 @@
   },
   "ToolResult": {
     "title": "占卜结果"
+  },
+  "ToolAnalysis": {
+    "title": "解卦"
   }
 }

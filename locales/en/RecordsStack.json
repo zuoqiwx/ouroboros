@@ -5,5 +5,8 @@
   },
   "RecordDetails": {
     "title": "Record Details"
+  },
+  "RecordAnalysis": {
+    "title": "Analysis"
   }
 }

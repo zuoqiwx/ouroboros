@@ -22,5 +22,8 @@
   },
   "ToolResult": {
     "title": "Result"
+  },
+  "ToolAnalysis": {
+    "title": "Analysis"
   }
 }
