@@ -20,7 +20,7 @@ function getBinaryDigits(number: number): [number, number, number] {
 
 function getTrigramFromIndex(index: number): Trigram {
   return new Trigram(
-    getBinaryDigits(index).map(
+    getBinaryDigits(index - 1).map(
       (digit) => new Line(digit ? false : true)
     ) as TrigramLines
   );
@@ -32,11 +32,18 @@ export function createHexagramFromDateTime(dateTime: Date): Hexagram {
   const hour = asChineseHour(dateTime.getHours());
   const dateSum = year + month + day;
   const allSum = dateSum + hour;
-  const upper = getTrigramFromIndex(getShiftedRemainder(dateSum, 8) - 1);
-  const lower = getTrigramFromIndex(getShiftedRemainder(allSum, 8) - 1);
+  const upper = getTrigramFromIndex(getShiftedRemainder(dateSum, 8));
+  const lower = getTrigramFromIndex(getShiftedRemainder(allSum, 8));
+  return Hexagram.fromTrigrams(lower, upper, getShiftedRemainder(allSum, 6));
+}
+
+export type NumberTriplet = [number, number, number];
+export function createHexagramFromNumbers(numbers: NumberTriplet): Hexagram {
+  const lower = getTrigramFromIndex(getShiftedRemainder(numbers[0], 8));
+  const upper = getTrigramFromIndex(getShiftedRemainder(numbers[1], 8));
   return Hexagram.fromTrigrams(
     lower,
     upper,
-    getShiftedRemainder(allSum, 6) - 1
+    getShiftedRemainder(numbers[2], 6)
   );
 }

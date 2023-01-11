@@ -176,7 +176,7 @@ export class Hexagram {
     const result = new Hexagram(
       lower.lines.concat(upper.lines) as HexagramLines
     );
-    result.lines[changeIndex].setChanged(true);
+    result.lines[changeIndex - 1].setChanged(true);
     return result;
   }
 

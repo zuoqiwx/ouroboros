@@ -6,6 +6,7 @@ import type { ToolsStackParamList } from "../../@types/navigation";
 import ToolsPage from "./Tools";
 import ToolManualPage from "./ToolManual";
 import ToolTimePage from "./ToolTime";
+import ToolNumbersPage from "./ToolNumbers";
 import RecordDetailsPage from "../common/RecordDetail";
 
 const Stack = createNativeStackNavigator<ToolsStackParamList>();
@@ -33,6 +34,13 @@ function ToolsStack() {
         component={ToolTimePage}
         options={{
           title: t("ToolTime.title"),
+        }}
+      />
+      <Stack.Screen
+        name="ToolNumbers"
+        component={ToolNumbersPage}
+        options={{
+          title: t("ToolNumbers.title"),
         }}
       />
       <Stack.Screen

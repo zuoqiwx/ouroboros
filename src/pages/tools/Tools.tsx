@@ -2,13 +2,10 @@ import React from "react";
 import { View, Button } from "react-native";
 import { useTranslation } from "react-i18next";
 
-import type {
-  ToolsStackParamList,
-  ToolsStackScreenProps,
-} from "../../@types/navigation";
+import type { ToolsStackParamList } from "../../@types/navigation";
 import { useNavigation } from "@react-navigation/native";
 
-const toolList = ["ToolManual", "ToolTime", "ToolNumber"];
+const toolList = ["ToolManual", "ToolTime", "ToolNumbers"];
 
 function ToolsPage() {
   const navigation = useNavigation();
