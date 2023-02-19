@@ -1,7 +1,8 @@
 {
   "tabName": "卦本",
   "Records": {
-    "title": "历史卦象"
+    "title": "历史卦象",
+    "clear_all": "清空记录"
   },
   "RecordDetails": {
     "title": "卦象细节"

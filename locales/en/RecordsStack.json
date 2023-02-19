@@ -1,7 +1,8 @@
 {
   "tabName": "Records",
   "Records": {
-    "title": "Saved Records"
+    "title": "Saved Records",
+    "clear_all": "Clear All"
   },
   "RecordDetails": {
     "title": "Record Details"

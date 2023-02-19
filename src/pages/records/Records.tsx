@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Button } from "react-native";
+import { useTranslation } from "react-i18next";
 
 import type { RecordsStackScreenProps } from "../../@types/navigation";
 import {
@@ -9,6 +10,7 @@ import {
 } from "../../logics/storage";
 
 function RecordsPage({ navigation }: RecordsStackScreenProps<"Records">) {
+  const { t } = useTranslation("RecordsStack");
   const [pairs, setPairs] = useState([] as Pair[]);
 
   useEffect(() => {
@@ -17,22 +19,29 @@ function RecordsPage({ navigation }: RecordsStackScreenProps<"Records">) {
       .catch((error) => console.error(error));
   });
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          title={t("Records.clear_all")}
+          onPress={() => {
+            deleteAllRecordPairs()
+              .then((success) => {
+                if (success) {
+                  console.log("Records cleared");
+                } else {
+                  console.error("Failed to save record");
+                }
+              })
+              .catch((error) => console.error(error));
+          }}
+        />
+      ),
+    });
+  }, [navigation, t]);
+
   return (
     <View>
-      <Button
-        title="Clear All"
-        onPress={() => {
-          deleteAllRecordPairs()
-            .then((success) => {
-              if (success) {
-                console.log("Records cleared");
-              } else {
-                console.error("Failed to save record");
-              }
-            })
-            .catch((error) => console.error(error));
-        }}
-      />
       {pairs.length === 0 ? (
         <Text>Nothing yet</Text>
       ) : (
