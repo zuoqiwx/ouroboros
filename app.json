@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ouroboros",
+    "name": "Ouroboros",
     "slug": "ouroboros",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,20 +14,26 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zuoqiwx.ouroboros"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.zuoqiwx.ouroboros"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3ee8eaed-9156-4365-8674-1d243469178f"
+      }
+    },
+    "owner": "zuoqiwx"
   }
 }
