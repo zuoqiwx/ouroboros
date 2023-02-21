@@ -12,6 +12,7 @@ import type {
 } from "@react-navigation/native";
 
 import type { Hexagram } from "../logics/models";
+import type { Section } from "../constants/analysis";
 
 export type HomeTabParamList = {
   RecordsStack: undefined;
@@ -32,6 +33,10 @@ export type RecordsStackParamList = {
   RecordAnalysis: {
     hexagram: Hexagram;
     showChange: boolean;
+  };
+  RecordAnalysisSection: {
+    name: string;
+    sections: Section[];
   };
 };
 export type RecordsStackNavigationProp<T extends keyof RecordsStackParamList> =
@@ -55,6 +60,10 @@ export type ToolsStackParamList = {
   ToolAnalysis: {
     hexagram: Hexagram;
     showChange: boolean;
+  };
+  ToolAnalysisSection: {
+    name: string;
+    sections: Section[];
   };
 };
 export type ToolsStackNavigationProp<T extends keyof ToolsStackParamList> =

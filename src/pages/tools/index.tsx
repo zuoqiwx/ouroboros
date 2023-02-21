@@ -9,6 +9,7 @@ import ToolTimePage from "./ToolTime";
 import ToolNumbersPage from "./ToolNumbers";
 import RecordDetailsPage from "../common/RecordDetail";
 import RecordAnalysisPage from "../common/RecordAnalysis";
+import RecordAnalysisSectionPage from "../common/RecordAnalysisSection";
 
 const Stack = createNativeStackNavigator<ToolsStackParamList>();
 
@@ -57,6 +58,13 @@ function ToolsStack() {
         component={RecordAnalysisPage}
         options={{
           title: t("ToolAnalysis.title"),
+          presentation: "modal",
+        }}
+      />
+      <Stack.Screen
+        name="ToolAnalysisSection"
+        component={RecordAnalysisSectionPage}
+        options={{
           presentation: "modal",
         }}
       />

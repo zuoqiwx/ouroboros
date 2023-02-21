@@ -59,7 +59,7 @@ export class Trigram {
   }
 }
 
-const enum HexagramTypes {
+export const enum HexagramTypes {
   Original = "original",
   Mutual = "mutual",
   Change = "change",
@@ -107,6 +107,10 @@ export class Hexagram {
 
   getIndex(): number {
     return this.lower().getIndex() * 8 + this.upper().getIndex();
+  }
+
+  isYoungAt(idx: number): boolean {
+    return 0 <= idx && idx < 6 && this.lines[idx].young;
   }
 
   mutual(): Hexagram | undefined {

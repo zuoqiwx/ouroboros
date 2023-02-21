@@ -10,7 +10,7 @@ import {
 } from "../../@types/navigation";
 import { Hexagram } from "../../logics/models";
 import { setRecord } from "../../logics/storage";
-import analysisInfo from "../../network/analysis_urls.json";
+import analysisInfo from "../../../assets/analysis/map.json";
 
 type PromptInfo = {
   title: string;
@@ -73,7 +73,7 @@ function DetailPage({
     Hexagram.getTransforms(hexagram);
   const { t } = useTranslation();
   const [saved, setSaved] = useState(false);
-  const lineHeight = 20;
+  const lineHeight = 18;
   const lineMargin = 2;
 
   function goToAnalysis(hexagram: Hexagram, showChange = false) {

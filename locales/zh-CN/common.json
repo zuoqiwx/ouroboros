@@ -21,5 +21,12 @@
   "mutual": "互卦",
   "change": "变卦",
   "complementary": "错卦",
-  "reverse": "综卦"
+  "reverse": "综卦",
+  "summary": "综述",
+  "yao1": "初九爻",
+  "yao2": "二九爻",
+  "yao3": "三九爻",
+  "yao4": "四九爻",
+  "yao5": "五九爻",
+  "yao6": "上九爻"
 }
