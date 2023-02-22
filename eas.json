@@ -3,10 +3,13 @@
     "appVersionSource": "remote"
   },
   "build": {
-    "staging": {
+    "testing": {
       "ios": {
         "simulator": true
       }
+    },
+    "staging": {
+      "distribution": "internal"
     },
     "production": {
       "autoIncrement": true

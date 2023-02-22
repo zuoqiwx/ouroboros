@@ -2,7 +2,6 @@
   "name": "ouroboros",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
-  "type": "module",
   "scripts": {
     "start": "APP_ENV=development expo start",
     "android": "APP_ENV=development expo start --android",
