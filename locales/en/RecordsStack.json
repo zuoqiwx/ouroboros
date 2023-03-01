@@ -2,7 +2,8 @@
   "tabName": "Records",
   "Records": {
     "title": "Saved Records",
-    "clear_all": "Clear All"
+    "clear_all": "Clear All",
+    "empty": "No record saved yet"
   },
   "RecordDetails": {
     "title": "Record Details"

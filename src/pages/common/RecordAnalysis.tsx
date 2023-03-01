@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Button, Text, StyleSheet, View } from "react-native";
+import { Button, Text, StyleSheet, ScrollView } from "react-native";
 import { RouteProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
@@ -40,7 +40,7 @@ function RecordAnalysisPage({
   }, [navigation, t, route.name]);
 
   return (
-    <View>
+    <ScrollView>
       <HexagramDisplay
         hexagram={hexagram}
         lineHeight={lineHeight}
@@ -54,9 +54,8 @@ function RecordAnalysisPage({
         title={t("summary")}
         onPress={() =>
           navigation.navigate(`${route.name}Section`, {
-            name: `${analysis.current.name} ${t("summary")}`,
+            name: `${analysis.current.name} - ${t("summary")}`,
             sections: analysis.current.overall,
-            isYoung: false,
           })
         }
       />
@@ -77,7 +76,7 @@ function RecordAnalysisPage({
           }}
         />
       ))}
-    </View>
+    </ScrollView>
   );
 }
 

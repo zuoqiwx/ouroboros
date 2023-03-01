@@ -29,7 +29,9 @@ function ToolNumbersPage() {
           title={t("next")}
           onPress={() => {
             navigation.navigate("ToolResult", {
-              hexagram: createHexagramFromNumbers(numbers as NumberTriplet),
+              hexagram: createHexagramFromNumbers(
+                numbers.slice().reverse() as NumberTriplet
+              ),
               showSave: true,
             });
           }}

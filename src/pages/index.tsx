@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import RecordsStack from "./records";
 import ToolsStack from "./tools";
-import SettingsStack from "./settings";
+// import SettingsStack from "./settings";
 
 function getTabIconByRoute(
   this: { route: RouteProp<ParamListBase> },
@@ -58,13 +58,13 @@ function HomeTab() {
           title: t("tabName", { ns: "ToolsStack" }),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="SettingsStack"
         component={SettingsStack}
         options={{
           title: t("tabName", { ns: "SettingsStack" }),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
