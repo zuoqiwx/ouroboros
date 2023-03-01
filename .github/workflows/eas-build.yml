@@ -1,4 +1,4 @@
-name: EAS Workflows
+name: EAS Build
 on:
   workflow_dispatch:
     inputs:
