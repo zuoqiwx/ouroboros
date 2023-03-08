@@ -57,6 +57,15 @@ export class Trigram {
       return prev + curr.toString() + "\n";
     }, "");
   }
+
+  static fromIndex(index: number): Trigram {
+    const lines: TrigramLines = [
+      new Line(Math.floor(index / 4) % 2 == 0),
+      new Line(Math.floor(index / 2) % 2 == 0),
+      new Line(index % 2 == 0),
+    ];
+    return new Trigram(lines);
+  }
 }
 
 export const enum HexagramTypes {
@@ -195,11 +204,13 @@ export class Hexagram {
     );
   }
 
-  static fromTrigrams(lower: Trigram, upper: Trigram, changeIndex: number) {
+  static fromTrigrams(lower: Trigram, upper: Trigram, changeIndex?: number) {
     const result = new Hexagram(
       lower.lines.concat(upper.lines) as HexagramLines
     );
-    result.lines[changeIndex - 1].setChanged();
+    if (changeIndex) {
+      result.lines[changeIndex - 1].setChanged();
+    }
     return result;
   }
 
@@ -208,5 +219,11 @@ export class Hexagram {
       value.lines.map((line) => Line.fromObject(line)) as HexagramLines,
       value.type
     );
+  }
+
+  static fromIndex(index: number): Hexagram {
+    const upper = Trigram.fromIndex(index % 8);
+    const lower = Trigram.fromIndex(Math.floor(index / 8));
+    return Hexagram.fromTrigrams(lower, upper);
   }
 }

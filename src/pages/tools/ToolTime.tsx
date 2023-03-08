@@ -3,13 +3,12 @@ import { Button, View, StyleSheet } from "react-native";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
+import type { ToolsStackScreenProps } from "../../@types/navigation";
 import { createHexagramFromDateTime } from "../../logics/algorithms";
 
-function ToolTimePage() {
-  const navigation = useNavigation();
+function ToolTimePage({ navigation }: ToolsStackScreenProps<"ToolTime">) {
   const { t } = useTranslation("ToolsStack");
   const [dateTime, setDateTime] = useState(new Date());
   const onDateChange = (event: DateTimePickerEvent, value?: Date) => {

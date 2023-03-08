@@ -2,13 +2,11 @@ import React from "react";
 import { View, Button } from "react-native";
 import { useTranslation } from "react-i18next";
 
-import type { ToolsStackParamList } from "../../@types/navigation";
-import { useNavigation } from "@react-navigation/native";
+import type { ToolsStackScreenProps } from "../../@types/navigation";
 
 const toolList = ["ToolManual", "ToolTime", "ToolNumbers"];
 
-function ToolsPage() {
-  const navigation = useNavigation();
+function ToolsPage({ navigation }: ToolsStackScreenProps<"ToolsMenu">) {
   const { t } = useTranslation("ToolsStack");
   return (
     <View>
@@ -17,7 +15,7 @@ function ToolsPage() {
           key={index}
           title={t(`${toolName}.title`)}
           onPress={() => {
-            navigation.navigate(toolName as keyof ToolsStackParamList);
+            navigation.navigate(toolName);
           }}
         />
       ))}

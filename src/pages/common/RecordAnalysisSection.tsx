@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
 import { ScrollView, Text, Button, View, StyleSheet } from "react-native";
-import { RouteProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
 import {
-  RecordsStackParamList,
-  ToolsStackParamList,
+  RecordsStackScreenProps,
+  ToolsStackScreenProps,
+  CatalogStackScreenProps,
 } from "../../@types/navigation";
 
 function RecordAnalysisSectionPage({
   route,
-}: {
-  route:
-    | RouteProp<RecordsStackParamList, "RecordAnalysisSection">
-    | RouteProp<ToolsStackParamList, "ToolAnalysisSection">;
-}) {
-  const navigation = useNavigation();
+  navigation,
+}:
+  | RecordsStackScreenProps<"RecordAnalysisSection">
+  | ToolsStackScreenProps<"ToolAnalysisSection">
+  | CatalogStackScreenProps<"CatalogAnalysisSection">) {
   const { t } = useTranslation();
   const { name, sections } = route.params;
 

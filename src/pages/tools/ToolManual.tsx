@@ -14,7 +14,10 @@ function isValidLines(lines: HexagramLinesOptional): boolean {
   return lines.every((line) => line);
 }
 
-function ToolManualPage({ navigation }: ToolsStackScreenProps<"ToolManual">) {
+function ToolManualPage({
+  route,
+  navigation,
+}: ToolsStackScreenProps<"ToolManual">) {
   const { t } = useTranslation("ToolsStack");
   const [lines, setLines] = useState(
     Array(6).fill(undefined) as HexagramLinesOptional
@@ -40,6 +43,13 @@ function ToolManualPage({ navigation }: ToolsStackScreenProps<"ToolManual">) {
       ),
     });
   }, [navigation, t, lines]);
+
+  useEffect(() => {
+    if (route.params) {
+      const { hexagram } = route.params;
+      hexagram && setLines(hexagram.lines);
+    }
+  }, [route.params]);
 
   return (
     <View>

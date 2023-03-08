@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { Button, Text, StyleSheet, ScrollView } from "react-native";
-import { RouteProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { useNavigation } from "@react-navigation/native";
 
 import {
-  RecordsStackParamList,
-  ToolsStackParamList,
+  RecordsStackScreenProps,
+  ToolsStackScreenProps,
+  CatalogStackScreenProps,
 } from "../../@types/navigation";
 import { HexagramTypes } from "../../logics/models";
 import HexagramDisplay from "../../components/HexagramDisplay";
@@ -14,14 +15,13 @@ import analysisList from "../../constants/analysis";
 
 function RecordAnalysisPage({
   route,
-}: {
-  route:
-    | RouteProp<RecordsStackParamList, "RecordAnalysis">
-    | RouteProp<ToolsStackParamList, "ToolAnalysis">;
-}) {
+}:
+  | RecordsStackScreenProps<"RecordAnalysis">
+  | ToolsStackScreenProps<"ToolAnalysis">
+  | CatalogStackScreenProps<"CatalogAnalysis">) {
   const navigation = useNavigation();
   const { t } = useTranslation();
-  const { hexagram, showChange } = route.params;
+  const { hexagram, showChange, showChangeSection } = route.params;
   const analysis = useRef(analysisList[hexagram.getIndex()]);
   const lineHeight = 35;
   const lineMargin = 5;
@@ -37,7 +37,22 @@ function RecordAnalysisPage({
           <Button title={t("back")} onPress={() => navigation.goBack()} />
         ),
       });
-  }, [navigation, t, route.name]);
+
+    route.name === "CatalogAnalysis" &&
+      navigation.setOptions({
+        headerRight: () => (
+          <Button
+            title={t("solve")}
+            onPress={() =>
+              navigation.navigate("ToolsStack", {
+                screen: "ToolManual",
+                params: { hexagram },
+              })
+            }
+          />
+        ),
+      });
+  }, [navigation, t, route.name, hexagram]);
 
   return (
     <ScrollView>
@@ -70,7 +85,9 @@ function RecordAnalysisPage({
             navigation.navigate(`${route.name}Section`, {
               name: `${analysis.current.name} - ${t(`yao${idx + 1}`)}`,
               sections: analysis.current.yaos[idx].filter((section) =>
-                showChange ? true : !section.title.includes(t("change"))
+                showChange || showChangeSection
+                  ? true
+                  : !section.title.includes(t("change"))
               ),
             });
           }}

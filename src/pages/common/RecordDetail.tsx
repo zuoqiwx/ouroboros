@@ -1,16 +1,16 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Text, View, Button, Alert, StyleSheet, Pressable } from "react-native";
-import { RouteProp, useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
 import HexagramDisplay from "../../components/HexagramDisplay";
 import {
-  RecordsStackParamList,
-  ToolsStackParamList,
+  RecordsStackScreenProps,
+  ToolsStackScreenProps,
 } from "../../@types/navigation";
 import { Hexagram } from "../../logics/models";
 import { setRecord } from "../../logics/storage";
 import analysisInfo from "../../../assets/analysis/map.json";
+import { useNavigation } from "@react-navigation/native";
 
 type PromptInfo = {
   title: string;
@@ -62,13 +62,11 @@ function createHexagramSavePrompt(
 
 function DetailPage({
   route,
-}: {
-  route:
-    | RouteProp<RecordsStackParamList, "RecordDetails">
-    | RouteProp<ToolsStackParamList, "ToolResult">;
-}) {
-  const navigation = useNavigation();
+}:
+  | RecordsStackScreenProps<"RecordDetails">
+  | ToolsStackScreenProps<"ToolResult">) {
   const { hexagram, showSave } = route.params;
+  const navigation = useNavigation();
   const { original, mutual, change, complementary, reverse } =
     Hexagram.getTransforms(hexagram);
   const { t } = useTranslation();
@@ -77,14 +75,14 @@ function DetailPage({
   const lineMargin = 2;
 
   function goToAnalysis(hexagram: Hexagram, showChange = false) {
-    const param = {
+    const params = {
       hexagram,
       showChange,
     };
     return () =>
       showSave
-        ? navigation.navigate("ToolAnalysis", param)
-        : navigation.navigate("RecordAnalysis", param);
+        ? navigation.navigate("ToolAnalysis", params)
+        : navigation.navigate("RecordAnalysis", params);
   }
 
   useEffect(() => {

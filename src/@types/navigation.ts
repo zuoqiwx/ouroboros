@@ -17,6 +17,7 @@ import type { Section } from "../constants/analysis";
 export type HomeTabParamList = {
   RecordsStack: undefined;
   ToolsStack: undefined;
+  CatalogStack: undefined;
   SettingsStack: undefined;
 };
 export type HomeTabNavigationProp<T extends keyof HomeTabParamList> =
@@ -33,6 +34,7 @@ export type RecordsStackParamList = {
   RecordAnalysis: {
     hexagram: Hexagram;
     showChange: boolean;
+    showChangeSection: boolean;
   };
   RecordAnalysisSection: {
     name: string;
@@ -52,7 +54,11 @@ export type RecordsStackScreenProps<T extends keyof RecordsStackParamList> =
 
 export type ToolsStackParamList = {
   ToolsMenu: undefined;
-  ToolManual: undefined;
+  ToolManual: {
+    hexagram?: Hexagram;
+  };
+  ToolNumbers: undefined;
+  ToolTime: undefined;
   ToolResult: {
     hexagram: Hexagram;
     showSave: boolean;
@@ -60,6 +66,7 @@ export type ToolsStackParamList = {
   ToolAnalysis: {
     hexagram: Hexagram;
     showChange: boolean;
+    showChangeSection?: boolean;
   };
   ToolAnalysisSection: {
     name: string;
@@ -75,4 +82,27 @@ export type ToolsStackScreenProps<T extends keyof ToolsStackParamList> =
   CompositeScreenProps<
     NativeStackScreenProps<ToolsStackParamList, T>,
     HomeTabScreenProps<"ToolsStack">
+  >;
+
+export type CatalogStackParamList = {
+  Catalog: undefined;
+  CatalogAnalysis: {
+    hexagram: Hexagram;
+    showChange: boolean;
+    showChangeSection: boolean;
+  };
+  CatalogAnalysisSection: {
+    name: string;
+    sections: Section[];
+  };
+};
+export type CatalogStackNavigationProp<T extends keyof CatalogStackParamList> =
+  CompositeNavigationProp<
+    NativeStackNavigationProp<CatalogStackParamList, T>,
+    HomeTabNavigationProp<"CatalogStack">
+  >;
+export type CatalogStackScreenProps<T extends keyof CatalogStackParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<CatalogStackParamList, T>,
+    HomeTabScreenProps<"CatalogStack">
   >;
