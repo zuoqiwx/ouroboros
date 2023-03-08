@@ -22,7 +22,8 @@ type PromptInfo = {
 function createHexagramSavePrompt(
   hexagram: Hexagram,
   promptInfo: PromptInfo,
-  setSaved: Dispatch<SetStateAction<boolean>>
+  setSaved: Dispatch<SetStateAction<boolean>>,
+  placeholder: string
 ) {
   return () => {
     const now = new Date();
@@ -35,7 +36,7 @@ function createHexagramSavePrompt(
           onPress: (name) => {
             const record = {
               name: name as string,
-              time: now,
+              time: now.getTime(),
               hexagram: hexagram,
             };
             setRecord(record)
@@ -55,7 +56,7 @@ function createHexagramSavePrompt(
         },
       ],
       "plain-text",
-      now.toLocaleString()
+      placeholder
     );
   };
 }
@@ -103,7 +104,12 @@ function DetailPage({
         headerRight: () => (
           <Button
             title={t("save")}
-            onPress={createHexagramSavePrompt(hexagram, promptInfo, setSaved)}
+            onPress={createHexagramSavePrompt(
+              hexagram,
+              promptInfo,
+              setSaved,
+              t("untitled")
+            )}
           />
         ),
       });

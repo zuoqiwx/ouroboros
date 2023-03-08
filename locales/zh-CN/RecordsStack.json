@@ -3,6 +3,7 @@
   "Records": {
     "title": "历史卦象",
     "clear_all": "清空记录",
+    "clear_all_message": "确定要清空所有记录吗？",
     "empty": "空空如也"
   },
   "RecordDetails": {

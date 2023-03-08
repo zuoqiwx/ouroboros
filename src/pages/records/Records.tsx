@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   Pressable,
+  Alert,
 } from "react-native";
 import { useTranslation } from "react-i18next";
 
@@ -32,15 +33,30 @@ function RecordsPage({ navigation }: RecordsStackScreenProps<"Records">) {
         <Button
           title={t("Records.clear_all")}
           onPress={() => {
-            deleteAllRecordPairs()
-              .then((success) => {
-                if (success) {
-                  console.log("Records cleared");
-                } else {
-                  console.error("Failed to save record");
-                }
-              })
-              .catch((error) => console.error(error));
+            Alert.alert(
+              t("Records.clear_all"),
+              t("Records.clear_all_message"),
+              [
+                {
+                  text: t("no"),
+                  style: "cancel",
+                },
+                {
+                  text: t("yes"),
+                  onPress: () => {
+                    deleteAllRecordPairs()
+                      .then((success) => {
+                        if (success) {
+                          console.log("Records cleared");
+                        } else {
+                          console.error("Failed to save record");
+                        }
+                      })
+                      .catch((error) => console.error(error));
+                  },
+                },
+              ]
+            );
           }}
         />
       ),
@@ -54,6 +70,7 @@ function RecordsPage({ navigation }: RecordsStackScreenProps<"Records">) {
   ) : (
     <ScrollView>
       {pairs.map(([key, { name, time, hexagram }]) => {
+        const date = new Date(time);
         return (
           <Pressable
             key={key}
@@ -65,7 +82,12 @@ function RecordsPage({ navigation }: RecordsStackScreenProps<"Records">) {
             }
             style={styles.record}
           >
-            <Text style={styles.text}>{name}</Text>
+            <View style={styles.nameContainer}>
+              <Text style={styles.name}>{name}</Text>
+            </View>
+            <View style={styles.timeContainer}>
+              <Text style={styles.time}>{`${date.toLocaleString()}`}</Text>
+            </View>
           </Pressable>
         );
       })}
@@ -80,7 +102,34 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   record: {
-    marginVertical: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    flexDirection: "row",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "light grey",
+  },
+  nameContainer: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  timeContainer: {
+    flex: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  name: {
+    textAlign: "left",
+    fontSize: 20,
+  },
+  time: {
+    textAlign: "right",
+    fontSize: 16,
+    color: "grey",
   },
   text: {
     textAlign: "center",

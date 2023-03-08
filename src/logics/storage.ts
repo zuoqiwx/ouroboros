@@ -4,7 +4,7 @@ import { Hexagram } from "./models";
 
 export type Record = {
   name: string;
-  time: Date;
+  time: number;
   hexagram: Hexagram;
 };
 
@@ -75,7 +75,7 @@ export function isRecordKey(key: string): boolean {
 }
 
 export async function setRecord(record: Record): Promise<boolean> {
-  const key = asRecordKey(record.time.getTime().toString());
+  const key = asRecordKey(record.time.toString());
   return await setData(key, record);
 }
 
