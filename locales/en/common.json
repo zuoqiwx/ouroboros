@@ -26,10 +26,28 @@
   "complementary": "Complmentary",
   "reverse": "Reverse",
   "summary": "Summary",
-  "yao1": "First Yao",
-  "yao2": "Second Yao",
-  "yao3": "Thrid Yao",
-  "yao4": "Fourth Yao",
-  "yao5": "Fifth Yao",
-  "yao6": "Sixth Yao"
+  "yao1": {
+    "yang": "First Yang Yao",
+    "yin": "First Yin Yao"
+  },
+  "yao2": {
+    "yang": "Second Yang Yao",
+    "yin": "Second Yin Yao"
+  },
+  "yao3": {
+    "yang": "Third Yang Yao",
+    "yin": "Third Yin Yao"
+  },
+  "yao4": {
+    "yang": "Fourth Yang Yao",
+    "yin": "Fourth Yin Yao"
+  },
+  "yao5": {
+    "yang": "Fifth Yang Yao",
+    "yin": "Fifth Yin Yao"
+  },
+  "yao6": {
+    "yang": "Last Yang Yao",
+    "yin": "Last Yin Yao"
+  }
 }

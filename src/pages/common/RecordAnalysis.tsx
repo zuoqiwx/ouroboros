@@ -69,30 +69,35 @@ function RecordAnalysisPage({
         title={t("summary")}
         onPress={() =>
           navigation.navigate(`${route.name}Section`, {
-            name: `${analysis.current.name} - ${t("summary")}`,
+            name: `${analysis.current.name} ${t("summary")}`,
             sections: analysis.current.overall,
           })
         }
       />
-      {[...Array(6).keys()].reverse().map((idx) => (
-        <Button
-          key={idx}
-          title={t(`yao${idx + 1}`)}
-          onPress={() => {
-            const showChange =
-              hexagram.type === HexagramTypes.Original &&
-              !hexagram.isYoungAt(idx);
-            navigation.navigate(`${route.name}Section`, {
-              name: `${analysis.current.name} - ${t(`yao${idx + 1}`)}`,
-              sections: analysis.current.yaos[idx].filter((section) =>
-                showChange || showChangeSection
-                  ? true
-                  : !section.title.includes(t("change"))
-              ),
-            });
-          }}
-        />
-      ))}
+      {[...Array(6).keys()].reverse().map((idx) => {
+        const yaoName = t(
+          `yao${idx + 1}.${hexagram.lines[idx].yang ? "yang" : "yin"}`
+        );
+        return (
+          <Button
+            key={idx}
+            title={yaoName}
+            onPress={() => {
+              const showChange =
+                hexagram.type === HexagramTypes.Original &&
+                !hexagram.isYoungAt(idx);
+              navigation.navigate(`${route.name}Section`, {
+                name: `${analysis.current.name} ${yaoName}`,
+                sections: analysis.current.yaos[idx].filter((section) =>
+                  showChange || showChangeSection
+                    ? true
+                    : !section.title.includes(t("change"))
+                ),
+              });
+            }}
+          />
+        );
+      })}
     </ScrollView>
   );
 }
